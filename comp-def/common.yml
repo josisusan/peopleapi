@@ -1,0 +1,41 @@
+packages:
+  # List of package names (e.g granitic.ws) referenced by components in this file.
+  - github.com/graniticio/granitic/v2/ws/handler
+  - github.com/graniticio/granitic/v2/validate
+  - peopleapi/endpoint/people
+  - peopleapi/pkg/stores
+components:
+  # Definition of components you want to be managed by Granitic
+  getPeopleHandler:
+    type: handler.WsHandler
+    HTTPMethod: GET
+    Logic:
+      type: people.PeopleIndex
+      Store: ref:storeMechanism
+    PathPattern: ^/people
+
+  postPersonHandler:
+    type: handler.WsHandler
+    HTTPMethod: POST
+    Logic:
+      type: people.PersonCreate
+      Store: ref:storeMechanism
+    PathPattern: ^/people
+    AutoValidator: ref:submitPersonValidator
+
+  putPersonHandler:
+    type: handler.WsHandler
+    HTTPMethod: PUT
+    Logic:
+      type: people.PersonUpdate
+      Store: ref:storeMechanism
+    PathPattern: ^/people/([a-zA-Z0-9\\-]+)
+    BindPathParams: ["UUID"]
+
+  storeMechanism:
+    type: stores.DynamodbStore
+    Name: conf:Service.DynamoStore
+
+  submitPersonValidator:
+    type: validate.RuleValidator
+    Rules: conf:submitPersonRules

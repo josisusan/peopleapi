@@ -1,0 +1,22 @@
+# Configuration you want to make available to your components
+Facilities:
+  HTTPServer: true
+  JSONWs: true
+  #RuntimeCtl: true
+  ServiceErrorManager: true
+HTTPServer:
+  Address: 0.0.0.0
+  Port: 3016
+  AccessLogging: true
+  AccessLog:
+    LogLinePreset: "framework"
+ApplicationLogger:
+  GlobalLogLevel: INFO
+Service:
+  CSVStore: People.csv
+  DynamoStore: PeopleInfo
+
+submitPersonRules:
+  - ["Name", "STR:INVALID_NAME", "REQ:INVALID_NAME"]
+serviceErrors:
+  - ["C", "INVALID_NAME", "Name is a required field."]
