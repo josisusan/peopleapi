@@ -12,7 +12,9 @@ import (
 )
 
 type DynamodbStore struct {
-	Name string
+	Name     string
+	Region   string
+	Endpoint string
 }
 
 type Item struct {
@@ -24,8 +26,8 @@ type Item struct {
 
 func (fs DynamodbStore) Write(content string) (string, error) {
 	ses, err := session.NewSession(&aws.Config{
-		Region:   aws.String("us-west-2"),
-		Endpoint: aws.String("http://localhost:8000"),
+		Region:   aws.String(fs.Region),
+		Endpoint: aws.String(fs.Endpoint),
 	})
 	if err != nil {
 		return "Dynamo Connection Issue", err
@@ -62,8 +64,8 @@ func (fs DynamodbStore) Write(content string) (string, error) {
 
 func (fs DynamodbStore) Read() ([][]string, error) {
 	ses, err := session.NewSession(&aws.Config{
-		Region:   aws.String("us-west-2"),
-		Endpoint: aws.String("http://localhost:8000"),
+		Region:   aws.String(fs.Region),
+		Endpoint: aws.String(fs.Endpoint),
 	})
 	if err != nil {
 		return [][]string{}, err
@@ -92,8 +94,8 @@ func (fs DynamodbStore) Read() ([][]string, error) {
 // Find finds the record in dynamo
 func (fs DynamodbStore) Find(uid string) ([]string, error) {
 	ses, err := session.NewSession(&aws.Config{
-		Region:   aws.String("us-west-2"),
-		Endpoint: aws.String("http://localhost:8000"),
+		Region:   aws.String(fs.Region),
+		Endpoint: aws.String(fs.Endpoint),
 	})
 	if err != nil {
 		return []string{}, err
@@ -125,8 +127,8 @@ func (fs DynamodbStore) Find(uid string) ([]string, error) {
 // Update updates db
 func (fs DynamodbStore) Update(uid string, u map[string]string) error {
 	ses, err := session.NewSession(&aws.Config{
-		Region:   aws.String("us-west-2"),
-		Endpoint: aws.String("http://localhost:8000"),
+		Region:   aws.String(fs.Region),
+		Endpoint: aws.String(fs.Endpoint),
 	})
 	if err != nil {
 		return err

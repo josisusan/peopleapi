@@ -43,6 +43,8 @@ Goto common.yml configuration and change the following lines
   storeMechanism:
     type: stores.DynamodbStore
     Name: conf:Service.DynamoStore
+    Region: us-west-2
+    Endpoint: http://localhost:8000
 ```
 
 To
