@@ -3,9 +3,11 @@ package stores
 import (
 	"encoding/csv"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"os"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -52,6 +54,30 @@ func (fs FileStore) Read() ([][]string, error) {
 	}
 
 	return data, nil
+}
+
+// Update method to update the person record according to uid.
+func (fs FileStore) Update(uid string, record map[string]string) error {
+	f, err := ioutil.ReadFile(fs.Name)
+	if err != nil {
+		fmt.Printf(err.Error())
+		return err
+	}
+	lines := strings.Split(string(f), "\n")
+
+	for i, line := range lines {
+		if strings.Contains(line, uid) {
+			lines[i] = fmt.Sprintf("%s,%s,%s,%s", uid, record["Name"], record["Age"], record["Gender"])
+		}
+	}
+	output := strings.Join(lines, "\n")
+	err = ioutil.WriteFile(fs.Name, []byte(output), 0644)
+	if err != nil {
+		log.Fatalln(err)
+		return err
+	}
+
+	return nil
 }
 
 func generateUUID() int64 {
