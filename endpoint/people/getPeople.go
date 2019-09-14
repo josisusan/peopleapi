@@ -17,7 +17,11 @@ type PeopleIndex struct {
 
 // Process Index handler for People
 func (pI *PeopleIndex) Process(ctx context.Context, req *ws.Request, res *ws.Response) {
-	data, _ := pI.Store.Read()
+	data, err := pI.Store.Read()
+	if err != nil {
+		res.HTTPStatus = 500
+		return
+	}
 	people := make([]Person, len(data))
 	for i, d := range data {
 		people[i].UUID = d[0]
