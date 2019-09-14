@@ -56,7 +56,6 @@ To
 ```
 
 ## Todo
-- [ ] Implement CSV Update functionality
 - [ ] Add validation on Update API
 - [ ] Add tests
 - [ ] Refactor
