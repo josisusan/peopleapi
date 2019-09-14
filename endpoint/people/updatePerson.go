@@ -8,7 +8,6 @@ import (
 )
 
 type PersonUpdateIFace interface {
-	Find(string) ([]string, error)
 	Update(string, map[string]string) error
 }
 
