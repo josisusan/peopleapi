@@ -11,9 +11,9 @@ local-table-create:
 					AttributeName=UUID,AttributeType=S \
 			--key-schema \
 					AttributeName=UUID,KeyType=HASH \
-	--provisioned-throughput \
+			--provisioned-throughput \
 					ReadCapacityUnits=10,WriteCapacityUnits=5 \
-	--endpoint-url http://localhost:8000
+			--endpoint-url http://localhost:8000
 
 local-table-status:
 	aws dynamodb describe-table --table-name PeopleInfo --endpoint-url http://localhost:8000 | grep TableStatus
