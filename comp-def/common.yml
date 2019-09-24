@@ -36,7 +36,11 @@ components:
     type: stores.DynamodbStore
     Name: conf:Service.DynamoStore
     Region: us-west-2
-    Endpoint: http://localhost:8000
+    Endpoint: http://dynamo:8000
+
+  # storeMechanism:
+  #   type: stores.FileStore
+  #   Name: conf:Service.CSVStore
 
   submitPersonValidator:
     type: validate.RuleValidator
