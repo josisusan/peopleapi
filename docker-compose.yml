@@ -1,0 +1,18 @@
+version: '3'
+services:
+  api:
+    image: peopleapi
+    ports:
+      - 3016:3016
+    environment:
+      - AWS_REGION='us-west-2'
+      - AWS_ACCESS_KEY_ID='test'
+      - AWS_SECRET_ACCESS_KEY='test'
+    depends_on:
+      - dynamo
+  dynamo:
+    image: amazon/dynamodb-local
+    ports:
+      - 8000:8000
+    command: "-jar DynamoDBLocal.jar -inMemory -sharedDb"
+
