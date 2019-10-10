@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/josisusan/peopleapi.svg?style=svg)](https://circleci.com/gh/josisusan/peopleapi)
+
 # Peopleapi
 
 First Golang API using [Granitic](http://www.granitic.io/)
