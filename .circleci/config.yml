@@ -22,5 +22,6 @@ jobs:
       - checkout
       - run: go mod download
       # specify any bash command here prefixed with `run: `
+      - run: go install github.com/graniticio/granitic-yaml/v2/cmd/grnc-yaml-bind
       - run: grnc-yaml-bind && go build
       - run: go test ./...
