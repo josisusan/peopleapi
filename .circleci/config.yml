@@ -22,4 +22,5 @@ jobs:
       - checkout
       - run: go mod download
       # specify any bash command here prefixed with `run: `
+      - run: grnc-yaml-bind && go build
       - run: go test ./...
